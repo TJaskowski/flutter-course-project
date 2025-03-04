@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 class DataFetcher {
     Future getData() async {
-    var response = await http.get(Uri.https('api.nbp.pl' , '/api/cenyzlota/'));
+    var response = await http.get(Uri.https('api.nbp.pl' , '/api/exchangerates/rates/a/chf/'));
     print(response.body);
   }
 
