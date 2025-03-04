@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mobile_app/core/api_client.dart';
 import 'package:mobile_app/models/currency.dart';
@@ -30,6 +32,7 @@ class _CurrencyDataState extends State<CurrencyData> {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if(snapshot.hasError) {
+          print(snapshot.error);
           return const Center(child: Text('hasError'));
         } else {
           return Center(
@@ -37,8 +40,8 @@ class _CurrencyDataState extends State<CurrencyData> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(' ${snapshot.data!.currencyName}'),
-               // Text('Code: ${snapshot.data!.currencySymbol}'),
-              //  Text('Mid: ${snapshot.data!.price}'),
+                Text('Code: ${snapshot.data!.currencySymbol}'),
+                Text('Mid: ${snapshot.data!.price}'),
               ],
             ),
           );
