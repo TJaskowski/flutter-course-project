@@ -8,16 +8,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const url = 'https://api.nbp.pl/api/exchangerates/rates/a';
     DataFetcher().getData();
-    
     return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CurrencyData(currencyCode: 'chf'),
-            CurrencyData(currencyCode: 'usd'),
-            CurrencyData(currencyCode: 'eur'),
+            CurrencyData(currencyCode: 'chf', urlLink: url,),
+            CurrencyData(currencyCode: 'usd', urlLink: url,),
+            CurrencyData(currencyCode: 'eur', urlLink: url,),
           ],
         ),
       ),

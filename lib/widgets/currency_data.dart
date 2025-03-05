@@ -1,28 +1,27 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile_app/core/api_client.dart';
 import 'package:mobile_app/models/currency.dart';
-import 'package:mobile_app/services/currency_service.dart';
+import 'package:mobile_app/services/api_service.dart';
 
 class CurrencyData extends StatefulWidget {
   final String currencyCode;
+  final String urlLink;
 
-  const CurrencyData({super.key, required this.currencyCode});
+  const CurrencyData({super.key, required this.currencyCode, required this.urlLink});
 
   @override
   State<CurrencyData> createState() => _CurrencyDataState();
 }
 
 class _CurrencyDataState extends State<CurrencyData> {
-  late CurrencyService currencyService;
+  late ApiService currencyService;
   late Future<Currency> currency;
   
   @override
   void initState() {
     super.initState();
-    currencyService = CurrencyService(apiClient: ApiClient(baseUrl: 'https://api.nbp.pl/api/exchangerates/rates/a'));
-    currency = currencyService.getCurrency(widget.currencyCode);
+    currencyService = ApiService(apiClient: ApiClient(baseUrl: widget.urlLink));
+    currency = currencyService.getData(widget.currencyCode, (data) => Currency.fromJson(data));
   }
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class _CurrencyDataState extends State<CurrencyData> {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if(snapshot.hasError) {
-          print(snapshot.error);
           return const Center(child: Text('hasError'));
         } else {
           return Center(
