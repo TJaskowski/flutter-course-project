@@ -12,12 +12,25 @@ class HomePage extends StatelessWidget {
     DataFetcher().getData();
     return const Scaffold(
       body: Center(
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CurrencyData(currencyCode: 'chf', urlLink: url,),
-            CurrencyData(currencyCode: 'usd', urlLink: url,),
-            CurrencyData(currencyCode: 'eur', urlLink: url,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("fafa")
+                // CurrencyData(currencyCode: 'chf', urlLink: url,),
+                // CurrencyData(currencyCode: 'usd', urlLink: url,),
+                // CurrencyData(currencyCode: 'eur', urlLink: url,),
+              ],
+            ),
+            SizedBox(width: 20),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+               
+              ],
+            )
           ],
         ),
       ),

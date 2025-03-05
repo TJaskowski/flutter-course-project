@@ -3,30 +3,22 @@ import 'package:mobile_app/core/api_client.dart';
 import 'package:mobile_app/models/currency.dart';
 import 'package:mobile_app/services/api_service.dart';
 
-class CurrencyData extends StatefulWidget {
+class CurrencyData extends StatelessWidget {
   final String currencyCode;
   final String urlLink;
 
   const CurrencyData({super.key, required this.currencyCode, required this.urlLink});
 
-  @override
-  State<CurrencyData> createState() => _CurrencyDataState();
-}
-
-class _CurrencyDataState extends State<CurrencyData> {
-  late ApiService currencyService;
-  late Future<Currency> currency;
-  
-  @override
-  void initState() {
-    super.initState();
-    currencyService = ApiService(apiClient: ApiClient(baseUrl: widget.urlLink));
-    currency = currencyService.getData(widget.currencyCode, (data) => Currency.fromJson(data));
+  Future<Currency> fetchCurrency() {
+    final currencyService = ApiService(apiClient: ApiClient(baseUrl: urlLink));
+    return currencyService.getData(currencyCode, (data) => Currency.fromJson(data));
+    
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Currency>(
-      future: currency,
+      future: fetchCurrency(),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
