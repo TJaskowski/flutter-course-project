@@ -29,6 +29,7 @@ class CurrencyData extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text("Default currency hardcoded to CHF"),
                 Text(' ${snapshot.data!.currencyName}'),
                 Text('Code: ${snapshot.data!.currencySymbol}'),
                 Text('Mid: ${snapshot.data!.price}'),
